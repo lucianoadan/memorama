@@ -43,7 +43,6 @@ function generaJuego(c,r){
 			) 
 	});
 
-
 	console.log('Intentos:'+getIntentos());
 	console.log('Vidas: '+vidas);
  
