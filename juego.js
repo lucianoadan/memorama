@@ -3,24 +3,22 @@ var IniciaJuego = false // Iniciar juego Falso=No
 var ProximoNivel = true; // Verdadero continuar el juego si es falso el juego se detiene
 var columnas = filas = 2 // Tamaño inicial de fichas o ciruclos en el tablero 2x2 osea 4 circulos
 var vidas = 3;
-var intentos = 0;
 var aciertos = 0;
+var nivel = 1;
 
 
 $(document).ready(function(){
 	//Genero el juego segun la cantidad de columnas y filas de cada nivel de dificultad
-	GeneraJuego(columnas ,filas);
+	generaJuego(columnas ,filas);
 });
  
-function GeneraJuego(c,r){
-	 console.log("Generando juego...");	
+function generaJuego(c,r){
+	 console.log("Generando juego... nivel "+nivel);	
 
 	//Si ProximoNivel es igual a falso indica que el juego debera detenerse
 	if(!ProximoNivel )
 		return;
-	 
-	//Detengo el juego
-	ProximoNivel = false;
+
 	//Borramos todos los elementos del escenario o tablero de juego
 	$( ".juego" ).fadeOut( 1000, 
 		// al finalizar el metodo desvanecer
@@ -35,23 +33,23 @@ function GeneraJuego(c,r){
 				function()
 				{
 					for(i = 0; i < (c * r); i++)
-						$( ".juego" ).append(CrearFigura("circulo", Tfigura)); 
+						$( ".juego" ).append(crearFigura("circulo", Tfigura)); 
 
 					$( ".juego" ).fadeIn(200);
 					 
 					// Creo en forma aleatoria cuales son los circulos del tablero que podran ser cliqueados y cuales no
-					CrearFiguraAzul();
+					crearFiguraAzul();
 				}
 			) 
 	});
 
-	//intentos = $( ".figura[selected='selected']" ).length;
-	// console.log('Intentos:'+intentos);
+
+	console.log('Intentos:'+getIntentos());
 	console.log('Vidas: '+vidas);
  
 }
  
-function CrearFigura(tipofigura, r){
+function crearFigura(tipofigura, r){
 	//Si se hace clic en alguna figura
 	return $("<div>").addClass("figura "+tipofigura).width(r).height(r).click(function(){
 		if(IniciaJuego)
@@ -63,13 +61,18 @@ function CrearFigura(tipofigura, r){
 				$(this).addClass("activa");
 			else{
 				$(this).addClass("error");
-				intentos--;
 			}
 			 
 			//Si la cantidad de clic en circulos activos y la cantidad de clic en circulos no activos es mayor a la cantidad de clic realizados no conti nuamos el juego y volveremos a regenerar la pantalla luego sin cambiar el nivel
-			var errors = $(".error").length;
+			var errors = getErrors();
+			var intentos = getIntentos();
+
+			console.log('---------------------------');
 			console.log('Errors '+errors);
 			console.log('Restan intentos: '+intentos);
+			console.log('Aciertos '+getAciertos());
+			console.log('---------------------------');
+
 
 			if($(".activa").length + errors >= TotalSeleccionadas)
 			{
@@ -100,7 +103,8 @@ function CrearFigura(tipofigura, r){
 						filas = 12;
 					} 
 
-					GeneraJuego(columnas,filas);
+					nivel++;
+					generaJuego(columnas,filas);
 					return;
 				}
 				//else{ document.write("Haz Fallado, intenta nuevamente");}
@@ -115,11 +119,11 @@ function CrearFigura(tipofigura, r){
 						});
 						*/
 						$('div#mensaje').text("Perdiste una vida");
-						$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
+						mostrarAzules();
 						vidas--;
 
 						setTimeout(function(){
-							GeneraJuego(columnas,filas);
+							generaJuego(columnas,filas);
 							$('div#mensaje').text("");
 						}, 2000);
 					}
@@ -137,7 +141,7 @@ function CrearFigura(tipofigura, r){
 	});
 }
 
-function CrearFiguraAzul(){
+function crearFiguraAzul(){
 	var length = $( ".juego > .figura" ).length
 	 
 	for(var count = 0; count < Math.ceil(length/3);){
@@ -153,11 +157,40 @@ function CrearFiguraAzul(){
 	intentos = $(".figura[selected='selected']").length;
 
 	//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
-	window.setTimeout(OcultarfigurasAzules,1200)
+	window.setTimeout(ocultarAzules,1200)
 }
 
-function OcultarfigurasAzules(){
+function ocultarAzules(){
 	$( ".juego > .figura" ).removeClass( "activa" );
 	IniciaJuego = true;
 	ProximoNivel = true;
+}
+
+
+function mostrarAzules(){
+	$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
+}
+
+//
+// Getters
+// 
+function getErrors(){
+	return $(".error").length;
+}
+
+function getAciertos(){
+	return $(".figura.activa").length;
+}
+
+function getIntentos(){
+	var errors = $(".error").length;
+	return Math.ceil(filas*columnas/3) - errors;
+}
+
+function getNivel(){
+	return nivel;
+}
+
+function getVidas(){
+	return vidas;
 }
