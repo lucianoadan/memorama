@@ -108,7 +108,8 @@ function crearFigura(tipofigura, r){
 				}
 				//else{ document.write("Haz Fallado, intenta nuevamente");}
 				else{
-					if (intentos==0){
+					if (intentos==0)
+					{
 						/*
 						swal({
 							title: "Haz fallado!",
@@ -121,10 +122,12 @@ function crearFigura(tipofigura, r){
 						mostrarAzules();
 						vidas--;
 
-						setTimeout(function(){
-							generaJuego(columnas,filas);
-							$('div#mensaje').text("");
-						}, 2000);
+						if (vidas != 0){
+							setTimeout(function(){
+								generaJuego(columnas,filas);
+								$('div#mensaje').text("");
+							}, 2000);
+						}	
 					}
 				}
 
