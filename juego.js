@@ -42,6 +42,7 @@ function generaJuego(c,r){
 
 	updateCounterVidas(vidas);
 	updateCounterIntentos(getIntentos());
+	showMensaje("Nivel "+nivel);
 
 	console.log('Vidas: '+ vidas);
 	console.log('Intentos:'+ getIntentos());
@@ -58,6 +59,7 @@ function crearFigura(tipofigura, r){
 
 			var intentos = getIntentos();
 			var aciertos = getAciertos();
+
 
 			//Verifico si esa figura tiene el atributo seleccionado o`sea si es una de las que estuvieron activas en azul
 			if($(this).attr("selected") == "selected"){
@@ -122,11 +124,10 @@ function crearFigura(tipofigura, r){
 						audio = new Audio('exito.mp3');
 						audio.play();
 					}, 700);
-
-					levelUp();
+					
 					setTimeout(function(){
+						levelUp();
 						generaJuego(columnas,filas);
-						showMensaje("");
 						IniciaJuego=true;
 					}, 2000);
 					return;
@@ -158,8 +159,8 @@ function crearFigura(tipofigura, r){
 
 						if (vidas != 0){
 							setTimeout(function(){
-								generaJuego(columnas,filas);
-								showMensaje("");
+								// showMensaje("");
+								generaJuego(columnas,filas);								
 								IniciaJuego = true;
 							}, 2000);
 						}	
@@ -223,6 +224,7 @@ function levelUp(){
 	} 
 
 	nivel++;
+	showMensaje("Nivel "+nivel);
 }
 
 //
