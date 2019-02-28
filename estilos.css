@@ -76,10 +76,21 @@ h3 {
     color: #fff;
 }
 
+#vidas_container {
+    display: inline-block;
+    margin-top: -20px;
+}
+
 #vidas {
 	color:  red;	
-    font-size: 22px;
+    font-size: 14px;
 }
+
+#vida_rota {
+    color:  red;    
+    font-size: 14px;
+}
+
 
 #intentos {
 	color:  white;	

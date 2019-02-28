@@ -44,7 +44,6 @@ function generaJuego(c,r){
 	});
 
 	updateCounterVidas(vidas);
-	updateCounterIntentos(getIntentos());
 	showMensaje("Nivel "+nivel);
 
 	console.log('Vidas: '+ vidas);
@@ -83,7 +82,7 @@ function crearFigura(tipofigura, r){
 
 				// no repito audio
 				if(intentos>getIntentos()){
-					audio = new Audio('roto.mp3');
+					audio = new Audio('fail_short.mp3');
 					audio.play();
 				}
 			}
@@ -121,7 +120,7 @@ function crearFigura(tipofigura, r){
 					  button: "siguiente nivel!",
 					});
 					*/
-					showMensaje("Bien Hecho!");
+					showMensajeBlinking("Bien Hecho!");
 
 					// timeout para evitar superposición de sonidos	
 					setTimeout(function(){
@@ -148,15 +147,24 @@ function crearFigura(tipofigura, r){
 							button: "Probar otra vez!",
 						});
 						*/
-						showMensaje("Perdiste una vida");
+						showMensajeBlinking("Perdiste una vida");
 						mostrarAzules();
 						vidas--;
+
+						updateCounterVidas(vidas,true);
+
+						// timeout para evitar superposición de sonidos	
+						setTimeout(function(){
+							updateCounterVidas(vidas);
+							audio = new Audio('roto.mp3');
+							audio.play();
+						}, 500);
 
 						// timeout para evitar superposición de sonidos	
 						setTimeout(function(){
 							audio = new Audio('fail.mp3');
 							audio.play();
-						}, 1000);
+						}, 1500);
 
 						updateCounterVidas(vidas);
 						console.log('Vidas: '+vidas);
@@ -175,8 +183,11 @@ function crearFigura(tipofigura, r){
 				}
 
 				if (vidas == 0){
+					// muestro roto el último corazón
+					updateCounterVidas(1,true);
+
 					console.log('Perdiste');
-					showMensaje("Perdiste!");
+					showMensajeBlinking("Perdiste!");
 					IniciaJuego = false;
 				}
 				
@@ -200,6 +211,7 @@ function crearFigurasAzules(){
 	} 
 
 	updateCounterIntentos(getIntentos());
+	showTableroConsola();
 
 	//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
 	setTimeout(ocultarAzules,1200)
@@ -265,17 +277,33 @@ function getVidas(){
 
 ///
 
-function updateCounterVidas(num){
-	$("#vidas").text(vidaChar[3].repeat(num));
+function updateCounterVidas(num, lastBroken=false){ /////////////
+	if(num<0)
+		throw "Vidas<0 ?";
+
+	if(lastBroken && num>0){
+		$("#vidas").text((vidaChar[4]+' ').repeat(num-1));
+		$("#vida_rota").text(vidaChar[5]).fadeIn(1000);
+		$("#vida_rota").text(vidaChar[5]).fadeOut(700);
+	}else{
+		$("#vidas").text((vidaChar[4]+' ').repeat(num));
+	}
 }
 
 function updateCounterIntentos(num){
-	$("#intentos").text(intentoChar[0].repeat(num)); 
+	$("#intentos").text(intentoChar[1].repeat(num)); 
 }
 
 function showMensaje(str){
 	$('div#mensaje').text(str);
 }
+
+function showMensajeBlinking(str){
+	$('div#mensaje').text(str);
+	$('div#mensaje').fadeOut(1000);
+	$('div#mensaje').fadeIn(1500);
+}
+
 
 ///
 
