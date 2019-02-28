@@ -1,11 +1,12 @@
 
 class Juego
 {
-	constructor(nivel, vidas, errores,tablero) {
+	constructor(nivel, vidas, errores, aciertos, tablero) {
 	   	
 	   	this.nivel 		= nivel;
 	   	this.vidas 		= vidas;
 	   	this.errores 	= errores;
+	   	this.aciertos	= aciertos;
 	   	this.tablero 	= tablero;
 	    this.intentos 	= this.getIntentos();
 	    this.gui 		= new GUI(this);
@@ -30,8 +31,9 @@ $(document).ready(function(){
 	let nivel = 1;
 	let vidas = 3;
 	let errores = 0;
+	let aciertos = 0;
 
 	let tablero = new Tablero(nivel);
-	let juego = new Juego(nivel, vidas, errores, tablero);
+	let juego = new Juego(nivel, vidas, errores, aciertos, tablero);
 });
 
