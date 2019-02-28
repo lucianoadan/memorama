@@ -1,4 +1,7 @@
-var Tfigura = 55; //Tamaño de la figura
+const Tfigura = 55; //Tamaño de la figura
+const vidaChar = ["♡", "♥", "❤"];
+const intentoChar = ["♖", "⚔"];
+
 var IniciaJuego = false // Iniciar juego Falso=No
 var columnas = filas = 2 // Tamaño inicial de fichas o ciruclos en el tablero 2x2 osea 4 circulos
 var vidas = 3;
@@ -94,10 +97,11 @@ function crearFigura(tipofigura, r){
 
 			console.log('---------------------------');
 			console.log('Nivel '+nivel);
+			showTableroConsola();
+			console.log('Vidas: '+vidas);
 			console.log('Errors '+errors);
 			console.log('Restan intentos: '+intentos);
 			console.log('Aciertos '+getAciertos());
-			console.log('Vidas: '+vidas);
 			console.log('---------------------------');
 
 
@@ -159,10 +163,11 @@ function crearFigura(tipofigura, r){
 
 						if (vidas != 0){
 							setTimeout(function(){
-								// showMensaje("");
 								generaJuego(columnas,filas);								
 								IniciaJuego = true;
 							}, 2000);
+						}else{
+							showMensaje("");
 						}	
 					}else{
 						setTimeout(()=>{IniciaJuego=true;},1200);
@@ -195,7 +200,6 @@ function crearFigurasAzules(){
 	} 
 
 	updateCounterIntentos(getIntentos());
-	showTableroConsola();
 
 	//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
 	setTimeout(ocultarAzules,1200)
@@ -211,7 +215,11 @@ function mostrarAzules(){
 	$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
 }
 
-function levelUp(){
+function levelUp()
+{
+	// el nivel máximo posible dependería de la resolución y geometría de la pantalla
+	// actualmente no depende ni de la orientación (portrail o landscape)
+
 	if(columnas == filas)
 		columnas++;
 	else if( columnas > filas)
@@ -258,11 +266,11 @@ function getVidas(){
 ///
 
 function updateCounterVidas(num){
-	$("#vidas").text("♡".repeat(num));
+	$("#vidas").text(vidaChar[1].repeat(num));
 }
 
 function updateCounterIntentos(num){
-	$("#intentos").text("♖".repeat(num)); // ⚔
+	$("#intentos").text(intentoChar[0].repeat(num)); 
 }
 
 function showMensaje(str){
