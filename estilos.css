@@ -1,102 +1,58 @@
 body {
-    margin: 0px;
-    padding: 0px; 
+margin:0px;
+padding:0px;
 }
-
 #fondo {
-    background: #000; 
-    text-align: center;
-    margin-top: -20px;
-    padding-top: 10px;
-    height: 800px;
-    display: block;
+background:#333 url(+.png);
+text-align:center;
+margin-top:-20px;
+padding-top:10px;
+height:800px;
+display: block;
 }
-
-h2 {
-    color: #fff;
+h2{
+color:#fff;
 }
-
-h3 {
-    color: #ccc;
+h3{
+color:#ccc;
 }
-
-.contenedor {
-    padding: 4px;
-    display: inline-block;
-    background-color: #333;
-    width: 200px;
-    height: 200px;
-    border: 1px black solid;
-    border: 1px solid rgb(204, 204, 204);
-    border-radius: 3px 3px 3px 3px;
-    -webkit-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
-    -moz-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
-    box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+.contenedor{
+padding:4px;
+display:inline-block;
+background-color: #333;
+width:200px;
+height:200px;
+border:1px black solid;
+border: 1px solid rgb(204, 204, 204);
+border-radius: 3px 3px 3px 3px;
+-webkit-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+-moz-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);;
 }
-
-.figura {
-    border: 2px #fff solid;
-    background: red;
-    margin: 0px;
-    padding: 0px;
-    display: inline-block;
-    box-shadow: 2px 2px 2px rgb(136, 136, 136);
-    margin: 2px;
+ 
+.figura{
+border:2px #fff solid;
+background: red;
+margin:0px;
+padding:0px;
+display:inline-block;
+box-shadow: 2px 2px 2px rgb(136, 136, 136);
+margin:2px;
 }
-
-.figura:hover {
-    cursor: pointer;
+.figura:hover{
+cursor:pointer;
 }
-
-.activa {
-    background-color: #4D90FE;
+.activa{
+background-color:#4D90FE;
 }
-
-.error {
-    background-image: url("genera.png");
+.error{
+background-image: url(genera.png);
 }
-
-.circulo {
-    /* border-radius:50px; */
-    width: 100px;
-    height: 100px;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-}
-
-#mensaje {
-    margin-top: 20px;
-    color: #ccc;
-}
-
-#title {
-    margin-bottom: 10px;
-    min-height: 22px;
-    color: #fff;
-}
-
-#vidas_container {
-    display: inline-block;
-    margin-top: -20px;
-}
-
-#vidas {
-	color:  red;	
-    font-size: 14px;
-}
-
-#vida_rota {
-    color:  red;    
-    font-size: 14px;
-}
-
-
-#intentos {
-	color:  white;	
-	margin-left: 10px;
-}
-
-.blink {
-    background: #FC79CE !important;
+.circulo{
+/* border-radius:50px; */
+width: 100px;
+height: 100px;
+-moz-border-radius: 50px;
+-webkit-border-radius: 50px;
+border-radius: 50px;
 }
