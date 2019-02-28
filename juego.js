@@ -19,7 +19,7 @@ class Juego
 
 	// el cáculo puede variar con el nivel
 	getIntentos(){
-		return Math.ceil(this.tablero.filas * this.tablero.columnas/3) - this.tablero.errores;
+		return Math.ceil(this.tablero.filas * this.tablero.columnas/3) - this.errores;
 	}
 
 }

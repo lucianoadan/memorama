@@ -35,7 +35,7 @@ class GUI
 					}
 
 
-					that.updateCounterIntentos(that.juego.tablero.intentos);
+					that.updateCounterIntentos(that.juego.intentos);
 
 					//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
 					setTimeout(that.ocultarAzules,1200);

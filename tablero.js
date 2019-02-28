@@ -7,8 +7,6 @@ class Tablero
 		this.columnas = Math.ceil((nivel-1) - (((nivel-1)*0.5) -2)); 
 		this.acertables = Math.ceil(this.filas*this.columnas/3);
 		this.fichas = [];
-		this.errores = 0;
-		this.intentos = this.intentos;
 
 		this.hacerTablero();
 	}	
