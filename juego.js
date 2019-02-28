@@ -54,7 +54,7 @@ function crearFigura(tipofigura, r){
 	return $("<div>").addClass("figura "+tipofigura).width(r).height(r).click(function(){
 		if(IniciaJuego)
 		{
-			var TotalSeleccionadas = $(".figura[selected='selected']").length;
+			var TotalSeleccionadas = getAcertables();
 
 			var intentos = getIntentos();
 			var aciertos = getAciertos();
@@ -102,8 +102,7 @@ function crearFigura(tipofigura, r){
 			if($(".activa").length + errors >= TotalSeleccionadas)
 			{
 
-				// IniciaJuego = false;
-				//$( ".figura[selected='selected']:not(.activa)" ).addClass("activa"); 
+				IniciaJuego = false;
 				 
 				// Si se aciertan todas ...
 				if(getAciertos() == getAcertables()){
@@ -127,7 +126,8 @@ function crearFigura(tipofigura, r){
 					levelUp();
 					setTimeout(function(){
 						generaJuego(columnas,filas);
-						$('div#mensaje').text("");
+						showMensaje("");
+						IniciaJuego=true;
 					}, 2000);
 					return;
 				}
@@ -160,8 +160,11 @@ function crearFigura(tipofigura, r){
 							setTimeout(function(){
 								generaJuego(columnas,filas);
 								showMensaje("");
+								IniciaJuego = true;
 							}, 2000);
 						}	
+					}else{
+						setTimeout(()=>{IniciaJuego=true;},1200);
 					}
 				}
 
@@ -278,4 +281,11 @@ function showTableroConsola(){
 		console.log(hilera);
 	}
 }
+
+function disableClicks(){
+	for(var i=0; i<filas*columnas;i++){
+		$($(".juego > .figura").get(i)).off('click');
+	}
+}
+	
 	
