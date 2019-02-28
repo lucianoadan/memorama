@@ -1,5 +1,5 @@
 const Tfigura = 55; //Tamaño de la figura
-const vidaChar = ["♡", "♥", "❤"];
+const vidaChar = ["♡", "♥", "❤","❤️","🖤","💔"];
 const intentoChar = ["♖", "⚔"];
 
 var IniciaJuego = false // Iniciar juego Falso=No
@@ -266,7 +266,7 @@ function getVidas(){
 ///
 
 function updateCounterVidas(num){
-	$("#vidas").text(vidaChar[1].repeat(num));
+	$("#vidas").text(vidaChar[3].repeat(num));
 }
 
 function updateCounterIntentos(num){
