@@ -131,6 +131,7 @@ function crearFigura(tipofigura, r){
 					setTimeout(function(){
 						levelUp();
 						generaJuego(columnas,filas);
+						setTimeout(()=> {ocultarAzules();},1200);
 						IniciaJuego=true;
 					}, 2000);
 					return;
@@ -171,7 +172,8 @@ function crearFigura(tipofigura, r){
 
 						if (vidas != 0){
 							setTimeout(function(){
-								generaJuego(columnas,filas);								
+								generaJuego(columnas,filas);
+								setTimeout(()=> {ocultarAzules();},1200);								
 								IniciaJuego = true;
 							}, 2000);
 						}else{
