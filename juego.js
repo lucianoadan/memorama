@@ -1,5 +1,6 @@
 
 // tiempo en que la GUI deja de responder, en milisegundos
+// es el tiempo mínimo que tengo para ver la renovación del tablero
 const responsividad = 350;
 
 class Juego
