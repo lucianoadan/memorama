@@ -30,12 +30,12 @@ class GUI
 						$( ".juego" ).append(that.crearFigura("circulo", Tfigura, i));
 
 						// azules 
-						if(that.juego.tablero.fichas[i] == true)
+						if(that.juego.tablero.fichas[i].selected)
 							$( ".juego > .figura#cell_"+i ).addClass("activa").attr( "selected", "selected" );
 					}
 
 
-					that.updateCounterIntentos(that.juego.intentos);
+					that.updateCounterIntentos(that.juego.getIntentos());
 
 					//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
 					setTimeout(that.ocultarAzules,1200);
@@ -48,14 +48,15 @@ class GUI
 
 		this.updateCounterVidas(this.juego.vidas);
 		this.showMensaje("Nivel "+ this.juego.nivel);
-	
+
+		this.log();
 	}
 	
 	log(){
 		console.log('Nivel: '+ this.juego.nivel);
 		this.tableroConsola();
 		console.log('Vidas: '+ this.juego.vidas);
-		console.log('Intentos:'+ this.juego.intentos);
+		console.log('Intentos:'+ this.juego.getIntentos());
 		console.log('Aciertos: '+ this.juego.aciertos);
 		console.log('Errores: '+ this.juego.errores);
 
@@ -67,6 +68,7 @@ class GUI
 
 		//console.log(`Creando ${tipofigura} de radio ${r} con id ${id}`);
 		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).click(function(){
+			//console.log('ID: '+id);
 			that.juego.clicked(id);
 		});
 	}
@@ -79,9 +81,10 @@ class GUI
 		$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
 	}
 
-	showLevel()
+	showLevel(nivel)
 	{
-		showMensaje("Nivel "+nivel);
+		this.showMensaje("Nivel "+nivel);
+		this.tableroConsola();
 	}
 
 	///
@@ -125,7 +128,7 @@ class GUI
 		for(let fil=0; fil<this.juego.tablero.filas;fil++){
 			let hilera = '';
 			for(let col=0;col<this.juego.tablero.columnas;col++){
-				let att = this.juego.tablero.fichas[col + (fil*this.juego.tablero.columnas)] == true ? 'X' : 'O';
+				let att = this.juego.tablero.fichas[col + (fil*this.juego.tablero.columnas)].selected ? 'X' : 'O';
 				hilera += att;
 			}
 			console.log(hilera);

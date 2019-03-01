@@ -1,8 +1,7 @@
 class Tablero
 {
-	constructor(nivel, intentos)
+	constructor(nivel)
 	{ 	
-		this.nivel = nivel;
 		this.filas = Math.ceil(nivel - ((nivel*0.5) -1)); 
 		this.columnas = Math.ceil((nivel-1) - (((nivel-1)*0.5) -2)); 
 		this.acertables = Math.ceil(this.filas*this.columnas/3);
@@ -15,15 +14,15 @@ class Tablero
 		let celdas = this.filas * this.columnas;
 
 		for(let i=0;i<this.filas * this.columnas; i++){
-			this.fichas[i] = false;
+			this.fichas[i] = {clicked: false, selected:false, active:false};
 		}
 
 		let count=0;
 		while(count < this.acertables){
 			let random = Math.ceil(Math.random() * celdas)-1;
 			
-			if(this.fichas[random]!=true){
-				this.fichas[random]=true;	
+			if(this.fichas[random].selected != true){
+				this.fichas[random].selected = true;	
 				count++;
 			}
 		}
