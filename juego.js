@@ -1,4 +1,7 @@
 
+// tiempo en que la GUI deja de responder, en milisegundos
+const responsividad = 350;
+
 class Juego
 {
 	constructor(nivel, vidas, errores, aciertos, tablero)
@@ -99,7 +102,7 @@ class Juego
 					that.gui.showMensaje("");
 				}	
 			}else{
-				setTimeout(()=>{that.jugando=true;},1200);
+				setTimeout(()=>{that.jugando=true;}, responsividad);
 			}
 		}
 
