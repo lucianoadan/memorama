@@ -56,7 +56,7 @@ class Juego
 		this.gui.updateCounterVidas(this.vidas);
 		this.gui.updateCounterIntentos(this.getIntentos());
 
-		if($(".activa").length + this.errores >= this.tablero.acertables)
+		if($(".activa").length + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
 		{
 
 			this.jugando = false;
@@ -80,7 +80,7 @@ class Juego
 
 				return;
 			}else{
-				if (this.getIntentos()==0)
+				if (this.getIntentos()<=0)
 				{
 					this.gui.showMensajeBlinking("Perdiste una vida");
 					this.gui.mostrarAzules();
@@ -92,7 +92,6 @@ class Juego
 
 					// timeout para evitar superposición de sonidos	
 					setTimeout(function(){
-						//that.gui.updateCounterVidas(this.vidas);
 						that.audio = new Audio('roto.mp3');
 						that.audio.play();
 					}, 500);
@@ -136,7 +135,7 @@ class Juego
 
 	// Podría ser funcion del nivel
 	getIntentos(){
-		return this.tablero.acertables - this.errores;
+		return Math.ceil(Math.sqrt(this.tablero.acertables)) - this.errores;
 	}
 
 	renovar(){
