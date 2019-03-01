@@ -62,16 +62,8 @@ class Juego
 			this.jugando = false;
 			 
 			// Si se aciertan todas ...
-			if(this.aciertos == this.tablero.acertables){
-			 
-				/*
-				swal({
-				  title: "Bien Hecho!",
-				  text: "Haz Acertado todo!",
-				  icon: "success",
-				  button: "siguiente nivel!",
-				});
-				*/
+			if(this.aciertos == this.tablero.acertables)
+			{
 				this.gui.showMensajeBlinking("Bien Hecho!");
 
 				// timeout para evitar superposición de sonidos	
@@ -90,14 +82,6 @@ class Juego
 			else{
 				if (this.getIntentos()==0)
 				{
-					/*
-					swal({
-						title: "Haz fallado!",
-						text: "No acertaste!",
-						icon: "error",
-						button: "Probar otra vez!",
-					});
-					*/
 					this.gui.showMensajeBlinking("Perdiste una vida");
 					this.gui.mostrarAzules();
 					this.vidas--;
