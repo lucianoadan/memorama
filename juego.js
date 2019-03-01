@@ -20,35 +20,24 @@ class Juego
 
 		let that = this;
 
-		let ficha = $(".juego > .figura#cell_"+id);
-
-		if(ficha.hasClass('pristine'))
-			ficha.removeClass('pristine').addClass('dirty');
-
 		//Verifico si esa es 'azul'
 		if(this.tablero.fichas[id].selected){
-			ficha.addClass("activa");
+			this.tablero.fichas[id].active = true;
+			this.gui.marcarAcierto(id);
 
-			// no repito audio
+			// no repito acción 
 			if(this.tablero.fichas[id].clicked != true){
-				this.audio = new Audio('ok.mp3');
-				this.audio.play();
-
+				this.playAudio('ok.mp3');
 				this.tablero.fichas[id].clicked = true;
 				this.aciertos++;
 			}
 		}else{
-			ficha.addClass("error");
-
 			// bliking
-			$(ficha).fadeOut(500);
-			$(ficha).fadeIn(500);
+			this.gui.blikingFicha(id);
 
-			// no repito audio
+			// no repito acción
 			if(this.tablero.fichas[id].clicked != true){
-				this.audio = new Audio('fail_short.mp3');
-				this.audio.play();
-
+				this.playAudio('fail_short.mp3');
 				this.tablero.fichas[id].clicked = true;
 				this.errores++;
 			}
@@ -57,7 +46,7 @@ class Juego
 		this.gui.updateCounterVidas(this.vidas);
 		this.gui.updateCounterIntentos(this.getIntentos());
 
-		if($(".activa").length + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
+		if(this.tablero.getActivas() + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
 		{
 
 			this.jugando = false;
@@ -69,8 +58,7 @@ class Juego
 
 				// timeout para evitar superposición de sonidos	
 				setTimeout(function(){
-					that.audio = new Audio('exito.mp3');
-					that.audio.play();
+					that.playAudio('exito.mp3');
 				}, 700);
 				
 				setTimeout(function(){
@@ -92,14 +80,12 @@ class Juego
 
 					// timeout para evitar superposición de sonidos	
 					setTimeout(function(){
-						that.audio = new Audio('roto.mp3');
-						that.audio.play();
+						that.playAudio('roto.mp3');
 					}, 500);
 
 					// timeout para evitar superposición de sonidos	
 					setTimeout(function(){
-						that.audio = new Audio('fail.mp3');
-						that.audio.play();
+						that.playAudio('fail.mp3');
 					}, 1500);
 
 					//this.gui.updateCounterVidas(vidas);
@@ -130,9 +116,8 @@ class Juego
 	} // end func
 
 
-	// Ya es función del nivel
 	getIntentos(){
-		return Math.ceil(Math.sqrt(this.tablero.acertables)) - this.errores;
+		return this.tablero.acertables - this.errores;
 	}
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
@@ -159,6 +144,11 @@ class Juego
 		}
 
 		this.gui.showLevel(this.nivel);
+	}
+
+	playAudio(file){
+		this.audio = new Audio(file);
+		this.audio.play();
 	}
 
 }

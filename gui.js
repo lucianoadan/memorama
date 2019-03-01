@@ -65,6 +65,13 @@ class GUI
 	crearFigura(tipofigura, r, id){
 		let that = this;
 		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).click(function(){
+			if(!that.juego.jugando)
+				return;	
+
+			if($(this).hasClass('pristine'))
+				$(this).removeClass('pristine').addClass('dirty');
+
+			// como figura notifico al juego que he sido clickeada
 			that.juego.clicked(id);
 		});
 	}
@@ -75,6 +82,16 @@ class GUI
 
 	mostrarAzules(){
 		$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
+	}
+
+	marcarAcierto(id){
+		$(".juego > .figura#cell_"+id).addClass("activa");
+	}
+
+	blikingFicha(id){
+		let ficha = $(".juego > .figura#cell_"+id);
+		ficha.fadeOut(500);
+		ficha.fadeIn(500);
 	}
 
 	showLevel(nivel)

@@ -27,4 +27,13 @@ class Tablero
 			}
 		}
 	}
+
+	getActivas(){
+		let activas = 0;
+		for(let i=0;i<this.filas * this.columnas; i++){
+			activas += this.fichas[i].active;
+		}
+		return activas;
+	}
+	
 }
