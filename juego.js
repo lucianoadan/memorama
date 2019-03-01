@@ -126,17 +126,6 @@ class Juego
 		return 400 + Math.ceil(1000/Math.sqrt(this.nivel));
 	}
 
-	renovar(){
-		this.aciertos = 0;
-		this.errores = 0;
-		this.tablero = new Tablero(this.nivel);
-		this.gui = new GUI(this);
-		setTimeout(()=> {
-			this.gui.ocultarAzules();
-			this.jugando=true;
-		}, this.getTiempoParaOcultarAzules());
-	}
-
 	levelUp(){
 		this.nivel++;
 		
@@ -147,6 +136,17 @@ class Juego
 		}
 
 		this.gui.showLevel(this.nivel);
+	}
+
+	renovar(){
+		this.aciertos = 0;
+		this.errores = 0;
+		this.tablero = new Tablero(this.nivel);
+		this.gui = new GUI(this);
+		setTimeout(()=> {
+			this.gui.ocultarAzules();
+			this.jugando=true;
+		}, this.getTiempoParaOcultarAzules());
 	}
 
 	playAudio(file){
