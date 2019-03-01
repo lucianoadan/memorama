@@ -18,6 +18,8 @@ class Juego
 		if(!this.jugando)
 			return;
 
+		this.jugando = false;
+
 		let that = this;
 
 		//Verifico si esa es 'azul'
@@ -29,7 +31,7 @@ class Juego
 			if(this.tablero.fichas[id].clicked != true){
 				this.playAudio('ok.mp3');
 				this.tablero.fichas[id].clicked = true;
-				this.aciertos++;
+				this.aciertos++; /// 
 			}
 		}else{
 			// bliking
@@ -46,70 +48,69 @@ class Juego
 		this.gui.updateCounterVidas(this.vidas);
 		this.gui.updateCounterIntentos(this.getIntentos());
 
-		if(this.tablero.getActivas() + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
+		//if(this.tablero.getActivas() + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
+		//{
+		 
+		// Si se aciertan todas ...
+		if(this.aciertos == this.tablero.acertables)
 		{
+			this.gui.showMensajeBlinking("Bien Hecho!");
 
-			this.jugando = false;
-			 
-			// Si se aciertan todas ...
-			if(this.aciertos == this.tablero.acertables)
+			// timeout para evitar superposición de sonidos	
+			setTimeout(function(){
+				that.playAudio('exito.mp3');
+			}, 700);
+			
+			setTimeout(function(){
+				that.levelUp();
+				that.renovar();
+			}, 2000);
+
+			return;
+		}else{
+			if (this.getIntentos()<=0)
 			{
-				this.gui.showMensajeBlinking("Bien Hecho!");
+				this.gui.showMensajeBlinking("Perdiste una vida");
+				this.gui.mostrarAzules();
+				this.errores = 0;
+				this.aciertos= 0;
+				
+				this.gui.flashUltimaVida(this.vidas);
+				this.vidas--;
 
 				// timeout para evitar superposición de sonidos	
 				setTimeout(function(){
-					that.playAudio('exito.mp3');
-				}, 700);
-				
+					that.playAudio('roto.mp3');
+				}, 500);
+
+				// timeout para evitar superposición de sonidos	
 				setTimeout(function(){
-					that.levelUp();
-					that.renovar();
-				}, 2000);
+					that.playAudio('fail.mp3');
+				}, 1500);
 
-				return;
-			}else{
-				if (this.getIntentos()<=0)
-				{
-					this.gui.showMensajeBlinking("Perdiste una vida");
-					this.gui.mostrarAzules();
-					this.errores = 0;
-					this.aciertos= 0;
-					
-					this.gui.flashUltimaVida(this.vidas);
-					this.vidas--;
+				//this.gui.updateCounterVidas(vidas);
+				console.log('Vidas: '+this.vidas);
 
-					// timeout para evitar superposición de sonidos	
+				if (that.vidas >= 0){
 					setTimeout(function(){
-						that.playAudio('roto.mp3');
-					}, 500);
-
-					// timeout para evitar superposición de sonidos	
-					setTimeout(function(){
-						that.playAudio('fail.mp3');
-					}, 1500);
-
-					//this.gui.updateCounterVidas(vidas);
-					console.log('Vidas: '+this.vidas);
-
-					if (that.vidas != 0){
-						setTimeout(function(){
-							that.renovar();
-						}, 2000);
-					}else{
-						that.gui.showMensaje("");
-					}	
+						that.renovar();
+					}, 2000);
 				}else{
-					setTimeout(()=>{that.jugando=true;},1200);
-				}
+					that.gui.showMensaje("");
+				}	
+			}else{
+				setTimeout(()=>{that.jugando=true;},1200);
 			}
-
-			if (this.vidas == 0){
-				console.log('Perdiste');
-				this.gui.showMensajeBlinking("Perdiste!");
-				this.jugando = false;
-			}
-			
 		}
+
+		// Se pueden jugar mientras existan intentos, con cero vidas.
+		if (this.vidas < 0){
+			console.log('Perdiste');
+			this.gui.showMensajeBlinking("Perdiste!");
+			this.jugando = false;
+		}
+			
+		///}
 
 		this.gui.log();
 		
@@ -117,7 +118,7 @@ class Juego
 
 
 	getIntentos(){
-		return this.tablero.acertables - this.errores;
+		return Math.ceil(Math.sqrt(this.tablero.acertables)) - this.errores;
 	}
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
@@ -130,8 +131,10 @@ class Juego
 		this.errores = 0;
 		this.tablero = new Tablero(this.nivel);
 		this.gui = new GUI(this);
-		setTimeout(()=> {this.gui.ocultarAzules();}, this.getTiempoParaOcultarAzules());
-		this.jugando=true;
+		setTimeout(()=> {
+			this.gui.ocultarAzules();
+			this.jugando=true;
+		}, this.getTiempoParaOcultarAzules());
 	}
 
 	levelUp(){
