@@ -38,7 +38,7 @@ class GUI
 					that.updateCounterIntentos(that.juego.getIntentos());
 
 					//Oculta las figuras seleccionadas luego de mostrar la secuencia a repetir
-					setTimeout(that.ocultarAzules,1200);
+					setTimeout(that.ocultarAzules,400);
 
 					$( ".juego" ).fadeIn(200);
 	

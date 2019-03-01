@@ -22,8 +22,6 @@ class Juego
 
 		let that = this;
 
-		let TotalSeleccionadas = this.tablero.acertables;
-
 		let ficha = $(".juego > .figura#cell_"+id);
 
 		//Verifico si esa es 'azul'
@@ -60,7 +58,7 @@ class Juego
 		this.gui.updateCounterVidas(this.vidas);
 		this.gui.updateCounterIntentos(this.getIntentos());
 
-		if($(".activa").length + this.errores >= TotalSeleccionadas)
+		if($(".activa").length + this.errores >= this.tablero.acertables)
 		{
 
 			this.jugando = false;
