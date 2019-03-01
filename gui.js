@@ -64,10 +64,7 @@ class GUI
 
 	crearFigura(tipofigura, r, id){
 		let that = this;
-
-		//console.log(`Creando ${tipofigura} de radio ${r} con id ${id}`);
 		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).click(function(){
-			//console.log('ID: '+id);
 			that.juego.clicked(id);
 		});
 	}
@@ -124,9 +121,8 @@ class GUI
 		}
 	}
 
-	tableroConsola(){
-		//console.log(`Tablero de nivel ${this.juego.tablero.nivel}`);
-
+	tableroConsola()
+	{
 		for(let fil=0; fil<this.juego.tablero.filas;fil++){
 			let hilera = '';
 			for(let col=0;col<this.juego.tablero.columnas;col++){

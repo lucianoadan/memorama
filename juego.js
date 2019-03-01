@@ -27,7 +27,6 @@ class Juego
 
 		//Verifico si esa es 'azul'
 		if(this.tablero.fichas[id].selected){
-			//console.log(`Ficha con id ${id} es azul`);
 			ficha.addClass("activa");
 
 			// no repito audio
@@ -39,7 +38,6 @@ class Juego
 				this.aciertos++;
 			}
 		}else{
-			//console.log(`Ficha con id ${id} es roja`);
 			ficha.addClass("error");
 
 			// bliking
@@ -132,7 +130,7 @@ class Juego
 	} // end func
 
 
-	// Podría ser funcion del nivel
+	// Ya es función del nivel
 	getIntentos(){
 		return Math.ceil(Math.sqrt(this.tablero.acertables)) - this.errores;
 	}
