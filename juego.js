@@ -11,8 +11,6 @@ class Juego
 	   	this.tablero 	= tablero;
 	    this.gui 		= new GUI(this);
 	    this.audio 		= null;
-
-	    //this.gui.log();
 	}
 
 	clicked(id)
@@ -85,12 +83,7 @@ class Juego
 				setTimeout(function(){
 					that.nivel++;
 					that.gui.showLevel(that.nivel);
-					that.aciertos = 0;
-					that.errores = 0;
-					that.tablero = new Tablero(that.nivel);
-					that.gui = new GUI(that);
-					setTimeout(()=> {that.gui.ocultarAzules();},1200);
-					that.jugando=true;
+					that.renovar();
 				}, 2000);
 				return;
 			}
@@ -130,12 +123,7 @@ class Juego
 
 					if (that.vidas != 0){
 						setTimeout(function(){
-							that.aciertos = 0;
-							that.errores = 0;
-							that.tablero = new Tablero(that.nivel);
-							that.gui = new GUI(that);
-							setTimeout(()=> {that.gui.ocultarAzules();},1200);								
-							that.jugando = true;
+							that.renovar();
 						}, 2000);
 					}else{
 						that.gui.showMensaje("");
@@ -166,18 +154,28 @@ class Juego
 		return Math.ceil(this.tablero.filas * this.tablero.columnas/3) - this.errores;
 	}
 
+	renovar(){
+		this.aciertos = 0;
+		this.errores = 0;
+		this.tablero = new Tablero(this.nivel);
+		this.gui = new GUI(this);
+		setTimeout(()=> {this.gui.ocultarAzules();},400);
+		this.jugando=true;
+	}
+
 }
 
-$(document).ready(function(){
-	// vidas, nivel, tablero, intentos,... puden ser serializados,
-	// almacenados y recuperados 
-	let nivel = 1;
-	let vidas = 3;
-	let errores = 0;
-	let aciertos = 0;
+// vidas, nivel, tablero, intentos,... puden ser serializados,
+// almacenados y recuperados 
+let nivel = 1;
+let vidas = 3;
+let errores = 0;
+let aciertos = 0;
+let juego;
 
+$(document).ready(function(){
 	let tablero = new Tablero(nivel);
-	let juego = new Juego(nivel, vidas, errores, aciertos, tablero);
+	juego = new Juego(nivel, vidas, errores, aciertos, tablero);
 	//console.log(juego);
 });
 
