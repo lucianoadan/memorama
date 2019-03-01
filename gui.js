@@ -89,17 +89,20 @@ class GUI
 
 	///
 
-	updateCounterVidas(num, lastBroken=false){ 
+	updateCounterVidas(num){ 
 		if(num<0)
 			throw "Vidas<0 ?";
 
-		if(lastBroken && num>0){
-			$("#vidas").text((vidaChar[4]+' ').repeat(num-1));
-			$("#vida_rota").text(vidaChar[5]).fadeIn(1000);
-			$("#vida_rota").text(vidaChar[5]).fadeOut(700);
-		}else{
-			$("#vidas").text((vidaChar[4]+' ').repeat(num));
-		}
+		$("#vidas").text((vidaChar[4]+' ').repeat(num));
+	}
+
+	flashUltimaVida(num){
+		if(num==0)
+			return;
+
+		$("#vidas").text((vidaChar[4]+' ').repeat(num-1));
+		$("#vida_rota").text(vidaChar[5]).fadeIn(1000);
+		$("#vida_rota").text(vidaChar[5]).fadeOut(700);
 	}
 
 	updateCounterIntentos(num){

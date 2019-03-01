@@ -77,21 +77,22 @@ class Juego
 					that.gui.showLevel(that.nivel);
 					that.renovar();
 				}, 2000);
+
 				return;
-			}
-			else{
+			}else{
 				if (this.getIntentos()==0)
 				{
 					this.gui.showMensajeBlinking("Perdiste una vida");
 					this.gui.mostrarAzules();
-					this.vidas--;
 					this.errores = 0;
+					this.aciertos= 0;
 					
-					this.gui.updateCounterVidas(vidas,true);
+					this.gui.flashUltimaVida(this.vidas);
+					this.vidas--;
 
 					// timeout para evitar superposición de sonidos	
 					setTimeout(function(){
-						that.gui.updateCounterVidas(vidas);
+						//that.gui.updateCounterVidas(this.vidas);
 						that.audio = new Audio('roto.mp3');
 						that.audio.play();
 					}, 500);
@@ -102,7 +103,7 @@ class Juego
 						that.audio.play();
 					}, 1500);
 
-					this.gui.updateCounterVidas(vidas);
+					//this.gui.updateCounterVidas(vidas);
 					console.log('Vidas: '+this.vidas);
 
 					if (that.vidas != 0){
@@ -119,7 +120,7 @@ class Juego
 
 			if (this.vidas == 0){
 				// muestro roto el último corazón
-				this.gui.updateCounterVidas(1,true);
+				//this.gui.updateCounterVidas(this.vidas);
 
 				console.log('Perdiste');
 				this.gui.showMensajeBlinking("Perdiste!");
@@ -135,7 +136,7 @@ class Juego
 
 	// Podría ser funcion del nivel
 	getIntentos(){
-		return Math.ceil(this.tablero.filas * this.tablero.columnas/3) - this.errores;
+		return this.tablero.acertables - this.errores;
 	}
 
 	renovar(){
