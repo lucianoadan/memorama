@@ -31,7 +31,7 @@ class GUI
 
 						// azules 
 						if(that.juego.tablero.fichas[i].selected)
-							$( ".juego > .figura#cell_"+i ).addClass("activa").attr( "selected", "selected" );
+							$( ".juego > .figura#cell_"+i ).addClass("activa").addClass("pristine").attr( "selected", "selected" );
 					}
 
 
@@ -74,7 +74,7 @@ class GUI
 	}
 
 	ocultarAzules(){
-		$( ".juego > .figura" ).removeClass( "activa" );
+		$( ".juego > .figura.pristine" ).removeClass( "activa" );
 	}
 
 	mostrarAzules(){

@@ -22,6 +22,9 @@ class Juego
 
 		let ficha = $(".juego > .figura#cell_"+id);
 
+		if(ficha.hasClass('pristine'))
+			ficha.removeClass('pristine').addClass('dirty');
+
 		//Verifico si esa es 'azul'
 		if(this.tablero.fichas[id].selected){
 			//console.log(`Ficha con id ${id} es azul`);
