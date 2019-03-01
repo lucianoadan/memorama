@@ -138,12 +138,17 @@ class Juego
 		return Math.ceil(Math.sqrt(this.tablero.acertables)) - this.errores;
 	}
 
+	// El tiempo para observar el patrón disminuye al aumentar el nivel
+	getTiempoParaOcultarAzules(){
+		return 400 + Math.ceil(1000/Math.sqrt(this.nivel));
+	}
+
 	renovar(){
 		this.aciertos = 0;
 		this.errores = 0;
 		this.tablero = new Tablero(this.nivel);
 		this.gui = new GUI(this);
-		setTimeout(()=> {this.gui.ocultarAzules();},400);
+		setTimeout(()=> {this.gui.ocultarAzules();}, this.getTiempoParaOcultarAzules());
 		this.jugando=true;
 	}
 
