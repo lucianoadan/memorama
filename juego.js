@@ -76,8 +76,7 @@ class Juego
 				}, 700);
 				
 				setTimeout(function(){
-					that.nivel++;
-					that.gui.showLevel(that.nivel);
+					that.levelUp();
 					that.renovar();
 				}, 2000);
 
@@ -121,9 +120,6 @@ class Juego
 			}
 
 			if (this.vidas == 0){
-				// muestro roto el último corazón
-				//this.gui.updateCounterVidas(this.vidas);
-
 				console.log('Perdiste');
 				this.gui.showMensajeBlinking("Perdiste!");
 				this.jugando = false;
@@ -153,6 +149,18 @@ class Juego
 		this.gui = new GUI(this);
 		setTimeout(()=> {this.gui.ocultarAzules();}, this.getTiempoParaOcultarAzules());
 		this.jugando=true;
+	}
+
+	levelUp(){
+		this.nivel++;
+		
+		// Regalo vida cada 5 niveles
+		if(this.nivel %5 ==0){
+			this.vidas++;
+			this.gui.updateCounterVidas(this.vidas);
+		}
+
+		this.gui.showLevel(this.nivel);
 	}
 
 }

@@ -62,7 +62,6 @@ class GUI
 
 	}
 
-
 	crearFigura(tipofigura, r, id){
 		let that = this;
 
