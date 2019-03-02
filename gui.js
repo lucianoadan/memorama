@@ -1,6 +1,6 @@
 const Tfigura = 55;
 const vidaChar = ["♡", "♥", "❤","❤️","🖤","💔"];
-const intentoChar = ["♖", "⚔"];
+const intentoChar = ["♖", "⚔","⚡"];
 
 class GUI
 {
@@ -21,7 +21,7 @@ class GUI
 			$( ".juego" ).empty();
 			 
 			// Expandir el escenario o tablero de juego para acomodar los circulos
-			$( ".contenedor" ).animate({height: ((Tfigura+8)*r)+"px",width: ((Tfigura+8)*c)+"px"},1000, 
+			$( ".micro_container" ).animate({height: ((Tfigura+8)*r)+"px",width: ((Tfigura+8)*c)+"px"},1000, 
 			// al finalizar la expansion con amimate()
 			// creo las nuevas figuras segun la nueva dimension de la pantalla i nivel de juego
 				function()
@@ -119,7 +119,7 @@ class GUI
 	}
 
 	updateCounterIntentos(num){
-		$("#intentos").text(intentoChar[1].repeat(num)); 
+		$("#intentos").text(intentoChar[2].repeat(num)); 
 	}
 
 	showMensaje(str){
