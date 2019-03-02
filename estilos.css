@@ -39,16 +39,6 @@ body {
     vertical-align: middle;
 }
 
-
-
-h2 {
-    color: #fff;
-}
-
-h3 {
-    color: #ccc;
-}
-
 .micro_container {
     padding: 4px;
     display: inline-block;
@@ -62,6 +52,20 @@ h3 {
     -moz-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
     box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
 }
+
+.juego {
+    
+}
+
+
+h2 {
+    color: #fff;
+}
+
+h3 {
+    color: #ccc;
+}
+
 
 .figura {
     border: 2px #fff solid;
