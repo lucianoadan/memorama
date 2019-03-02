@@ -114,8 +114,8 @@ class GUI
 			return;
 
 		$("#vidas").text((vidaChar[4]+' ').repeat(num-1));
-		$("#vida_rota").text(vidaChar[5]).fadeIn(1000);
-		$("#vida_rota").text(vidaChar[5]).fadeOut(700);
+		$("#vida_rota").text(vidaChar[5]).fadeIn(600);
+		$("#vida_rota").text(vidaChar[5]).fadeOut(1500);
 	}
 
 	updateCounterIntentos(num){

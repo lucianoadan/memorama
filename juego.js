@@ -110,6 +110,7 @@ class Juego
 		if (this.vidas < 0){
 			console.log('Perdiste');
 			this.gui.showMensajeBlinking("Perdiste!");
+			this.gui.mostrarAzules();
 			this.jugando = false;
 		}
 			
