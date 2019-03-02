@@ -67,7 +67,6 @@ class Juego
 			
 			setTimeout(function(){
 				that.levelUp();
-				that.renovar();
 			}, 2000);
 
 			return;
@@ -140,6 +139,13 @@ class Juego
 		}
 
 		this.gui.showLevel(this.nivel);
+		this.renovar();
+	}
+
+	gotoLevel(n){
+		this.nivel = n;
+		this.gui.showLevel(this.nivel);
+		this.renovar();
 	}
 
 	renovar(){
