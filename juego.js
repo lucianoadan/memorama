@@ -17,7 +17,7 @@ class Juego
 	    this.audio 		= null;
 
 	    let that = this;
-	    setTimeout(()=>{that.jugando = true;}, that.gui.getSpinningTime()+2000);
+	    setTimeout(()=>{that.jugando = true;}, that.gui.getSpinningTime()*1000 + 2000);
 	    
 	}
 
@@ -99,7 +99,7 @@ class Juego
 				if (that.vidas >= 0){
 					setTimeout(function(){
 						that.renovar();
-					}, 2000 + 2 * this.gui.getSpinningTime());
+					}, 2000 + this.gui.getSpinningTime() * 1000);
 				}else{
 					that.gui.showMensaje("");
 				}	
@@ -127,7 +127,7 @@ class Juego
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
 	getTiempoParaOcultarAzules(){
-		return 400 + Math.ceil(600/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 30 - this.gui.getSpinningTime();
+		return 550 + Math.ceil(800/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 35 - this.gui.getSpinningTime() * 250;
 	}
 
 	levelUp(){

@@ -137,6 +137,10 @@ class GUI
 		return parseFloat($('.spinner').css('animationDuration'));
 	}
 
+	//setSpinningTime(seconds){
+	//	$('.spinner').css('animationDuration', parseFloat(seconds) + 's');
+	//}
+
 	blinkingFicha(id){
 		let ficha = $(".juego > .figura#cell_"+id);
 		ficha.fadeOut(500);
