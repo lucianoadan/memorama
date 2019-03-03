@@ -39,7 +39,8 @@ class Juego
 			}
 		}else{
 			// bliking
-			this.gui.blikingFicha(id);
+			//this.gui.blinkingFicha(id);
+			this.gui.rotarFicha(id);
 
 			// no repito acción
 			if(this.tablero.fichas[id].clicked != true){
@@ -52,9 +53,6 @@ class Juego
 		this.gui.updateCounterVidas(this.vidas);
 		this.gui.updateCounterIntentos(this.getIntentos());
 
-		//if(this.tablero.getActivas() + this.errores >= this.tablero.acertables || this.getIntentos() <= 0)
-		//{
-		 
 		// Si se aciertan todas ...
 		if(this.aciertos == this.tablero.acertables)
 		{
@@ -113,8 +111,6 @@ class Juego
 			this.gui.mostrarAzules();
 			this.jugando = false;
 		}
-			
-		///}
 
 		this.gui.log();
 		
@@ -127,12 +123,12 @@ class Juego
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
 	getTiempoParaOcultarAzules(){
-		return 400 + Math.ceil(1000/Math.sqrt(this.nivel));
+		return 400 + Math.ceil(1000/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 15;
 	}
 
 	levelUp(){
 		this.nivel++;
-		
+
 		// Regalo vida cada 5 niveles
 		if(this.nivel %5 ==0){
 			this.vidas++;

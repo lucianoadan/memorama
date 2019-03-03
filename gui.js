@@ -64,7 +64,7 @@ class GUI
 
 	crearFigura(tipofigura, r, id){
 		let that = this;
-		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).click(function(){
+		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).addClass('spinner').click(function(){
 			if(!that.juego.jugando)
 				return;	
 
@@ -85,10 +85,25 @@ class GUI
 	}
 
 	marcarAcierto(id){
-		$(".juego > .figura#cell_"+id).addClass("activa");
+		let ficha = $(".juego > .figura#cell_"+id);
+		ficha.css('-webkit-animation-play-state','running');
+		setTimeout(()=>{
+			ficha.addClass("activa");
+		},1500);
+		setTimeout(()=>{
+			ficha.css('-webkit-animation-play-state','paused');
+		},3000);
 	}
 
-	blikingFicha(id){
+	rotarFicha(id){
+		let ficha = $(".juego > .figura#cell_"+id);
+		ficha.css('-webkit-animation-play-state','running');
+		setTimeout(()=>{
+			ficha.css('-webkit-animation-play-state','paused');
+		},3000);
+	}
+
+	blinkingFicha(id){
 		let ficha = $(".juego > .figura#cell_"+id);
 		ficha.fadeOut(500);
 		ficha.fadeIn(500);
@@ -96,6 +111,10 @@ class GUI
 
 	showLevel(nivel)
 	{
+		// temporalmente lo hago acá 
+		if(nivel>1)
+			$('#tip').fadeOut(1500);
+
 		this.showMensaje("Nivel "+nivel);
 		this.tableroConsola();
 	}
