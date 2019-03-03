@@ -41,8 +41,6 @@ class Juego
 				this.aciertos++; /// 
 			}
 		}else{
-			// bliking
-			//this.gui.blinkingFicha(id);
 			this.gui.rotarFicha(id);
 
 			// no repito acción
@@ -149,7 +147,6 @@ class Juego
 	}
 
 	renovar(){
-		this.off();
 		this.aciertos = 0;
 		this.errores = 0;
 		this.tablero = new Tablero(this.nivel);
@@ -196,6 +193,5 @@ let juego;
 $(document).ready(function(){
 	let tablero = new Tablero(nivel);
 	juego = new Juego(nivel, vidas, errores, aciertos, tablero);
-	//console.log(juego);
 });
 

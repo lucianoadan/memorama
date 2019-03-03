@@ -140,20 +140,20 @@ h3 {
 */
 
 .stage {
-    -webkit-perspective: 1200px;
-    -moz-perspective: 1200px;
-    -ms-perspective: 1200px;
-    perspective: 1200px;
+    -webkit-perspective: 120px;
+    -moz-perspective: 120px;
+    -ms-perspective: 120px;
+    perspective: 120px;
 }
 
 /* WebKit and Opera browsers */
-@-webkit-keyframes spinner_rev {
+@-webkit-keyframes spinner_der {
     from { -webkit-transform: rotateY(0deg);    }
     to   { -webkit-transform: rotateY(-360deg); }
 }
 
 /* all other browsers */
-@keyframes spinner_rev {
+@keyframes spinner_der {
     from {
       -moz-transform: rotateY(0deg);
       -ms-transform: rotateY(0deg);
@@ -166,13 +166,13 @@ h3 {
 }
 
 /* WebKit and Opera browsers */
-@-webkit-keyframes spinner {
+@-webkit-keyframes spinner_izq {
     from { -webkit-transform: rotateY(0deg);    }
     to   { -webkit-transform: rotateY(360deg); }
 }
 
 /* all other browsers */
-@keyframes spinner {
+@keyframes spinner_izq {
     from {
       -moz-transform: rotateY(0deg);
       -ms-transform: rotateY(0deg);
@@ -185,12 +185,12 @@ h3 {
 }
 
 .spinner {
-    -webkit-animation-name: spinner;
+    -webkit-animation-name: spinner_izq;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-duration: 1.5s;
 
-    animation-name: spinner;
+    animation-name: spinner_izq;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
     animation-duration: 1.5s;
@@ -204,4 +204,10 @@ h3 {
     animation-play-state: paused;
 }
 
+#header {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
 
+#tip {
+
+}
