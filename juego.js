@@ -7,7 +7,7 @@ class Juego
 {
 	constructor(nivel, vidas, errores, aciertos, tablero)
 	{  	
-	   	this.jugando	= true;
+		this.jugando	= false;
 	   	this.nivel 		= nivel;
 	   	this.vidas 		= vidas;
 	   	this.errores 	= errores;
@@ -15,6 +15,10 @@ class Juego
 	   	this.tablero 	= tablero;
 	    this.gui 		= new GUI(this);
 	    this.audio 		= null;
+
+	    let that = this;
+	    setTimeout(()=>{that.jugando = true;}, that.gui.getSpinningTime()+2000);
+	    
 	}
 
 	clicked(id)
@@ -95,7 +99,7 @@ class Juego
 				if (that.vidas >= 0){
 					setTimeout(function(){
 						that.renovar();
-					}, 2000);
+					}, 2000 + 2 * this.gui.getSpinningTime());
 				}else{
 					that.gui.showMensaje("");
 				}	
@@ -123,7 +127,7 @@ class Juego
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
 	getTiempoParaOcultarAzules(){
-		return 400 + Math.ceil(1000/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 15;
+		return 400 + Math.ceil(600/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 30 - this.gui.getSpinningTime();
 	}
 
 	levelUp(){
@@ -149,11 +153,11 @@ class Juego
 		this.aciertos = 0;
 		this.errores = 0;
 		this.tablero = new Tablero(this.nivel);
-		this.gui = new GUI(this);
 		setTimeout(()=> {
+			this.gui = new GUI(this); // debe ir acá dentro
 			this.gui.ocultarAzules();
 			this.jugando=true;
-		}, this.getTiempoParaOcultarAzules());
+		}, this.getTiempoParaOcultarAzules() + this.gui.getSpinningTime());
 	}
 
 	playAudio(file){

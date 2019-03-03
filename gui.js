@@ -77,30 +77,64 @@ class GUI
 	}
 
 	ocultarAzules(){
-		$( ".juego > .figura.pristine" ).removeClass( "activa" );
+		//$( ".juego > .figura.pristine" ).removeClass( "activa" );
+		let fichas = $(".juego > .figura.pristine");
+		let t = parseFloat($('.spinner').css('animationDuration'));
+
+		fichas.css('-webkit-animation-play-state','running');
+		setTimeout(()=>{
+			fichas.removeClass("activa");
+		},t*1000*0.25);
+		setTimeout(()=>{
+			fichas.css('-webkit-animation-play-state','paused');
+		},t*1000*0.5);
 	}
 
+	// Puede crear una sensación rara y confundir al usuario ya que él/ella podría hacer girar su ficha al mismo tiempo
 	mostrarAzules(){
-		$( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
+		// $( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
+		
+		let fichas = $(".figura[selected='selected']:not(.activa)");
+		let t = parseFloat($('.spinner').css('animationDuration'));
+
+		setTimeout(()=>{ 
+			fichas.css('-webkit-animation-play-state','running');
+			setTimeout(()=>{
+				fichas.addClass("activa");
+			},t*1000*0.25);
+			setTimeout(()=>{
+				fichas.css('-webkit-animation-play-state','paused');
+			},t*1000*0.5);
+
+		}, t*1000*2);
 	}
 
 	marcarAcierto(id){
 		let ficha = $(".juego > .figura#cell_"+id);
+		let t = parseFloat($('.spinner').css('animationDuration'));
+
 		ficha.css('-webkit-animation-play-state','running');
 		setTimeout(()=>{
 			ficha.addClass("activa");
-		},1500);
+		},t*1000*0.25);
 		setTimeout(()=>{
 			ficha.css('-webkit-animation-play-state','paused');
-		},3000);
+		},t*1000*0.5);
 	}
 
 	rotarFicha(id){
 		let ficha = $(".juego > .figura#cell_"+id);
+		let t = parseFloat($('.spinner').css('animationDuration'));
+
 		ficha.css('-webkit-animation-play-state','running');
 		setTimeout(()=>{
 			ficha.css('-webkit-animation-play-state','paused');
-		},3000);
+		},t*1000*0.5);
+	}
+
+	// @return float tiempo en segundos
+	getSpinningTime(){
+		return parseFloat($('.spinner').css('animationDuration'));
 	}
 
 	blinkingFicha(id){
