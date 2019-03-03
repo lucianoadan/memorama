@@ -136,16 +136,24 @@ h3 {
 
 /*
     https://www.the-art-of-web.com/css/3d-transforms/
+    https://stackoverflow.com/questions/6410730/how-to-do-a-webkit-css-endless-rotation-animation
 */
 
+.stage {
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    perspective: 1200px;
+}
+
 /* WebKit and Opera browsers */
-@-webkit-keyframes spinner {
+@-webkit-keyframes spinner_rev {
     from { -webkit-transform: rotateY(0deg);    }
     to   { -webkit-transform: rotateY(-360deg); }
 }
 
 /* all other browsers */
-@keyframes spinner {
+@keyframes spinner_rev {
     from {
       -moz-transform: rotateY(0deg);
       -ms-transform: rotateY(0deg);
@@ -157,11 +165,23 @@ h3 {
     }
 }
 
-.stage {
-    -webkit-perspective: 1200px;
-    -moz-perspective: 1200px;
-    -ms-perspective: 1200px;
-    perspective: 1200px;
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner {
+    from { -webkit-transform: rotateY(0deg);    }
+    to   { -webkit-transform: rotateY(360deg); }
+}
+
+/* all other browsers */
+@keyframes spinner {
+    from {
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }to{
+      -moz-transform: rotateY(360deg);
+      -ms-transform: rotateY(360deg);
+      transform: rotateY(360deg);
+    }
 }
 
 .spinner {
@@ -183,3 +203,5 @@ h3 {
     -webkit-animation-play-state: paused;
     animation-play-state: paused;
 }
+
+

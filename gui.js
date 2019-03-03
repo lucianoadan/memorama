@@ -64,7 +64,8 @@ class GUI
 
 	crearFigura(tipofigura, r, id){
 		let that = this;
-		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).addClass('spinner').click(function(){
+		return $("<div>").addClass("figura "+tipofigura).width(r).height(r).attr('id', 'cell_'+id).addClass('spinner')
+		.click(function(){
 			if(!that.juego.jugando)
 				return;	
 
@@ -132,9 +133,11 @@ class GUI
 		},t*1000*0.5);
 	}
 
-	// @return float tiempo en segundos
+
+	// @return float tiempo en segundos -- hardcoded !!!!!!
 	getSpinningTime(){
-		return parseFloat($('.spinner').css('animationDuration'));
+		return 1.5; 
+		//return parseFloat($('.spinner').css('animationDuration'));
 	}
 
 	//setSpinningTime(seconds){

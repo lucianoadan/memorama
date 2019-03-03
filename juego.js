@@ -1,13 +1,12 @@
 
-// tiempo en que la GUI deja de responder, en milisegundos
-// es el tiempo mínimo que tengo para ver la renovación del tablero
 const responsividad = 350;
+const delta_renovar = 4000;
 
 class Juego
 {
 	constructor(nivel, vidas, errores, aciertos, tablero)
 	{  	
-		this.jugando	= false;
+		this.jugando 	= false;
 	   	this.nivel 		= nivel;
 	   	this.vidas 		= vidas;
 	   	this.errores 	= errores;
@@ -17,16 +16,16 @@ class Juego
 	    this.audio 		= null;
 
 	    let that = this;
-	    setTimeout(()=>{that.jugando = true;}, that.gui.getSpinningTime()*1000 + 2000);
+	    setTimeout(()=>{that.on();}, that.gui.getSpinningTime()*1000 + 1500);
 	    
 	}
 
 	clicked(id)
 	{
-		if(!this.jugando)
+		if(!this.isOn())
 			return;
 
-		this.jugando = false;
+		this.off();
 
 		let that = this;
 
@@ -104,7 +103,7 @@ class Juego
 					that.gui.showMensaje("");
 				}	
 			}else{
-				setTimeout(()=>{that.jugando=true;}, responsividad);
+				setTimeout(()=>{that.on();}, responsividad);
 			}
 		}
 
@@ -113,7 +112,7 @@ class Juego
 			console.log('Perdiste');
 			this.gui.showMensajeBlinking("Perdiste!");
 			this.gui.mostrarAzules();
-			this.jugando = false;
+			this.off();
 		}
 
 		this.gui.log();
@@ -127,7 +126,7 @@ class Juego
 
 	// El tiempo para observar el patrón disminuye al aumentar el nivel
 	getTiempoParaOcultarAzules(){
-		return 550 + Math.ceil(800/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 35 - this.gui.getSpinningTime() * 250;
+		return 550 + Math.ceil(800/Math.sqrt(this.nivel)) + this.tablero.filas * this.tablero.columnas * 35 - parseInt(this.gui.getSpinningTime() * 250);
 	}
 
 	levelUp(){
@@ -150,19 +149,38 @@ class Juego
 	}
 
 	renovar(){
+		this.off();
 		this.aciertos = 0;
 		this.errores = 0;
 		this.tablero = new Tablero(this.nivel);
+
 		setTimeout(()=> {
 			this.gui = new GUI(this); // debe ir acá dentro
 			this.gui.ocultarAzules();
-			this.jugando=true;
-		}, this.getTiempoParaOcultarAzules() + this.gui.getSpinningTime());
+		}, this.getTiempoParaOcultarAzules() + this.gui.getSpinningTime() * 1000);
+
+		setTimeout(()=> {
+			this.on();
+		}, this.getTiempoParaOcultarAzules() + this.gui.getSpinningTime() * 1000 + delta_renovar);
 	}
 
 	playAudio(file){
 		this.audio = new Audio(file);
 		this.audio.play();
+	}
+
+	on(){
+		this.jugando = true;
+		console.log('Jugando (...)');
+	}
+
+	off(){
+		this.jugando = false;
+		console.log('Juego parado -----------------');
+	}
+
+	isOn(){
+		return this.jugando;
 	}
 
 }
