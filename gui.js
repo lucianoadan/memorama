@@ -78,7 +78,6 @@ class GUI
 	}
 
 	ocultarAzules(){
-		//$( ".juego > .figura.pristine" ).removeClass( "activa" );
 		let fichas = $(".juego > .figura.pristine");
 		let t = parseFloat($('.spinner').css('animationDuration'));
 
@@ -93,8 +92,6 @@ class GUI
 
 	// Puede crear una sensación rara y confundir al usuario ya que él/ella podría hacer girar su ficha al mismo tiempo
 	mostrarAzules(){
-		// $( ".figura[selected='selected']:not(.activa)" ).addClass("activa");
-		
 		let fichas = $(".figura[selected='selected']:not(.activa)");
 		let t = parseFloat($('.spinner').css('animationDuration'));
 
@@ -110,6 +107,7 @@ class GUI
 		}, t*1000*2);
 	}
 
+	// rojo -> azul
 	marcarAcierto(id){
 		let ficha = $(".juego > .figura#cell_"+id);
 		let t = parseFloat($('.spinner').css('animationDuration'));
@@ -123,6 +121,7 @@ class GUI
 		},t*1000*0.5);
 	}
 
+	// no cambia el color (útil solo para rojo -> rojo)
 	rotarFicha(id){
 		let ficha = $(".juego > .figura#cell_"+id);
 		let t = parseFloat($('.spinner').css('animationDuration'));
@@ -133,10 +132,26 @@ class GUI
 		},t*1000*0.5);
 	}
 
+	// azul --> rojo
+	taparAcierto(id){
+		let ficha = $(".juego > .figura#cell_"+id);
+		let t = parseFloat($('.spinner').css('animationDuration'));
+
+		ficha.css('-webkit-animation-name','spinner_der'); // cambio sentido
+		ficha.css('-webkit-animation-play-state','running');
+		setTimeout(()=>{
+			ficha.removeClass("activa");
+		},t*1000*0.25);
+		setTimeout(()=>{
+			ficha.css('-webkit-animation-play-state','paused');
+			ficha.css('-webkit-animation-name','spinner_izq'); // cambio sentido
+		},t*1000*0.5);
+		
+	}
 
 	// @return float tiempo en segundos -- hardcoded !!!!!!
 	getSpinningTime(){
-		return 1.5; 
+		return 1; 
 		//return parseFloat($('.spinner').css('animationDuration'));
 	}
 

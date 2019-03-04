@@ -140,10 +140,10 @@ h3 {
 */
 
 .stage {
-    -webkit-perspective: 120px;
-    -moz-perspective: 120px;
-    -ms-perspective: 120px;
-    perspective: 120px;
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    perspective: 1200px;
 }
 
 /* WebKit and Opera browsers */
@@ -188,12 +188,12 @@ h3 {
     -webkit-animation-name: spinner_izq;
     -webkit-animation-timing-function: linear;
     -webkit-animation-iteration-count: infinite;
-    -webkit-animation-duration: 1.5s;
+    -webkit-animation-duration: 1s;
 
     animation-name: spinner_izq;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    animation-duration: 1.5s;
+    animation-duration: 1s;
 
     -webkit-transform-style: preserve-3d;
     -moz-transform-style: preserve-3d;

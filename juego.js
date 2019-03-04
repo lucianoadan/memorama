@@ -32,14 +32,18 @@ class Juego
 		//Verifico si esa es 'azul'
 		if(this.tablero.fichas[id].selected){
 			this.tablero.fichas[id].active = true;
-			this.gui.marcarAcierto(id);
 
 			// no repito acción 
 			if(this.tablero.fichas[id].clicked != true){
+				this.gui.marcarAcierto(id); ///
 				this.playAudio('ok.mp3');
 				this.tablero.fichas[id].clicked = true;
-				this.aciertos++; /// 
+				this.aciertos++; 
+			}else{
+				setTimeout(()=>{this.gui.taparAcierto(id);}, parseInt(this.gui.getSpinningTime() * 1000)); ///
+				setTimeout(()=>{this.gui.marcarAcierto(id);}, parseInt(this.gui.getSpinningTime() * 2000)); ///
 			}
+
 		}else{
 			this.gui.rotarFicha(id);
 
@@ -57,7 +61,7 @@ class Juego
 		// Si se aciertan todas ...
 		if(this.aciertos == this.tablero.acertables)
 		{
-			this.gui.showMensajeBlinking("Bien Hecho!");
+			this.gui.showMensajeBlinking("Bimen Hecho!");
 
 			// timeout para evitar superposición de sonidos	
 			setTimeout(function(){
