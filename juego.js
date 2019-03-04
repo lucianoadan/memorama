@@ -40,8 +40,8 @@ class Juego
 				this.tablero.fichas[id].clicked = true;
 				this.aciertos++; 
 			}else{
-				setTimeout(()=>{this.gui.taparAcierto(id);}, parseInt(this.gui.getSpinningTime() * 1000)); ///
-				setTimeout(()=>{this.gui.marcarAcierto(id);}, parseInt(this.gui.getSpinningTime() * 2000)); ///
+				this.gui.taparAcierto(id);///
+				setTimeout(()=>{this.gui.marcarAcierto(id);}, parseInt(this.gui.getSpinningTime() * 1000 * 1.10)); ///
 			}
 
 		}else{
