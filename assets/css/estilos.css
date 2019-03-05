@@ -1,0 +1,209 @@
+body {
+    margin: 0px;
+    padding: 0px; 
+}
+
+.container {
+
+}
+
+#header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    color:  white;
+    height: auto;
+    width: 100%;
+    text-align: center;
+}
+
+#fondo {
+    width: 100%;
+    display: table;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+}
+
+.middle_container {
+    background: #000; 
+    text-align: center;
+    margin-top: -20px;
+    padding-top: 10px;
+    width: 100%;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.micro_container {
+    padding: 4px;
+    display: inline-block;
+    background-color: #333;
+    width: 200px;
+    height: 200px;
+    border: 1px black solid;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 3px 3px 3px 3px;
+    -webkit-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+    box-shadow: 6px 5px 8px 0px rgba(50, 50, 50, 0.75);
+}
+
+.juego {
+
+}
+
+
+h2 {
+    color: #fff;
+}
+
+h3 {
+    color: #ccc;
+}
+
+
+.figura {
+    border: 2px #fff solid;
+    background: red;
+    margin: 0px;
+    padding: 0px;
+    display: inline-block;
+    box-shadow: 2px 2px 2px rgb(136, 136, 136);
+    margin: 2px;
+}
+
+.figura:hover {
+    cursor: pointer;
+}
+
+.activa {
+    background-color: #4D90FE;
+}
+
+.circulo {
+    /* border-radius:50px; */
+    width: 100px;
+    height: 100px;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+}
+
+#mensaje {
+    margin-top: 20px;
+    color: #ccc;
+}
+
+#title {
+    margin-bottom: 10px;
+    min-height: 22px;
+    color: #fff;
+}
+
+#vidas_container {
+    display: inline-block;
+    margin-top: -20px;
+}
+
+#vidas {
+	color:  red;	
+    font-size: 14px;
+}
+
+#vida_rota {
+    color:  red;    
+    font-size: 14px;
+}
+
+
+#intentos {
+	color:  white;	
+	margin-left: 10px;
+}
+
+.blink {
+    background: #FC79CE !important;
+}
+
+/*
+    https://www.the-art-of-web.com/css/3d-transforms/
+    https://stackoverflow.com/questions/6410730/how-to-do-a-webkit-css-endless-rotation-animation
+*/
+
+.stage {
+    -webkit-perspective: 1200px;
+    -moz-perspective: 1200px;
+    -ms-perspective: 1200px;
+    perspective: 1200px;
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner_der {
+    from { -webkit-transform: rotateY(0deg);    }
+    to   { -webkit-transform: rotateY(-360deg); }
+}
+
+/* all other browsers */
+@keyframes spinner_der {
+    from {
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }to{
+      -moz-transform: rotateY(-360deg);
+      -ms-transform: rotateY(-360deg);
+      transform: rotateY(-360deg);
+    }
+}
+
+/* WebKit and Opera browsers */
+@-webkit-keyframes spinner_izq {
+    from { -webkit-transform: rotateY(0deg);    }
+    to   { -webkit-transform: rotateY(360deg); }
+}
+
+/* all other browsers */
+@keyframes spinner_izq {
+    from {
+      -moz-transform: rotateY(0deg);
+      -ms-transform: rotateY(0deg);
+      transform: rotateY(0deg);
+    }to{
+      -moz-transform: rotateY(360deg);
+      -ms-transform: rotateY(360deg);
+      transform: rotateY(360deg);
+    }
+}
+
+.spinner {
+    -webkit-animation-name: spinner_izq;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-duration: 1s;
+
+    animation-name: spinner_izq;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+
+    -webkit-animation-play-state: paused;
+    animation-play-state: paused;
+}
+
+#header {
+    font-family: "HelveticaNeue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+}
+
+#tip {
+
+}
